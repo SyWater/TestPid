@@ -1,0 +1,47 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+
+class Main {
+    public static void main(String[] args) {
+        System.out.println("Try clicking the Run button.");
+        double pInput = 1.0, iInput = 1.0, dInput = 0.1;
+        double input = 1, output, goalPoint = 25;
+
+        double accumulatedError = 0, previousError = 0;
+        
+        long startTime = System.nanoTime() / 100000000;
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        
+        while (true) {
+            long currentTime = System.nanoTime() / 100000000;
+            double changedTime = (double)(currentTime - startTime);
+
+            double error = goalPoint - input;
+            accumulatedError += error * changedTime;
+            double derivativeError = (error - previousError) / changedTime;
+
+            output = pInput * error + iInput * accumulatedError + dInput * derivativeError;
+            
+            input += output;
+
+            startTime = currentTime;
+            previousError = error;
+            
+            System.out.println(input);
+            
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+
+    
+}
